@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #05060a;
+  --bg2: #0b1020;
+  --text: #f7f9ff;
+  --muted: #a8b2d1;
+  --line: rgba(255,255,255,0.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--text);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(114,241,255,0.18), transparent 34%),
+    radial-gradient(circle at 84% 12%, rgba(157,124,255,0.22), transparent 32%),
+    radial-gradient(circle at 60% 75%, rgba(255,114,200,0.11), transparent 42%),
+    linear-gradient(135deg, var(--bg), var(--bg2) 58%, #050611);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+}
+
+.hero-shell {
+  perspective: 1300px;
+}
+
+.orbital-shell {
+  transform-style: preserve-3d;
+  animation: float 7s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotateX(58deg) rotateZ(-10deg); }
+  50% { transform: translateY(-20px) rotateX(62deg) rotateZ(-4deg); }
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  transform-style: preserve-3d;
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotateZ(360deg); }
+}
+
+.shard {
+  animation: explode 5.6s ease-in-out infinite;
+}
+
+@keyframes explode {
+  0%, 100% {
+    transform: translate3d(0, 0, 48px) rotateZ(0deg) scale(0.96);
+  }
+  50% {
+    transform: translate3d(var(--tx), var(--ty), 132px) rotateZ(var(--rz)) scale(1.05);
+  }
+}
